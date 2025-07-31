@@ -17,19 +17,15 @@ export default async function handler(req, res) {
     }
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4",
-      messages: [
-        {
-          role: "system",
-          content:
-            "Eres un mecánico automotriz experto. Cuando recibas un código OBD2 como P0300 o P0420, entrega su significado, causas más probables y pasos recomendados de diagnóstico y reparación."
-        },
-        {
-          role: "user",
-          content: prompt
-        }
-      ]
-    });
+  model: "gpt-3.5-turbo", // <-- cambia esto
+  messages: [
+    {
+      role: "system",
+      content: "Eres un mecánico automotriz experto..."
+    },
+    { role: "user", content: prompt }
+  ]
+});
 
     res.status(200).json({ respuesta: completion.choices[0].message.content });
   } catch (error) {
