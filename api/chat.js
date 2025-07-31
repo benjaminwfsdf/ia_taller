@@ -18,10 +18,12 @@ export default async function handler(req, res) {
       messages: [
         {
           role: "system",
-          content:
-            "Eres un experto en diagnóstico automotriz. Responde códigos de avería OBD2 como P0300, P0420, etc., explicando causas, posibles soluciones y pasos para repararlo."
+          content: "Eres un experto en diagnóstico de fallas automotrices. Explica códigos OBD2 como P0300, P0420, etc., con causas y soluciones."
         },
-        { role: "user", content: prompt }
+        {
+          role: "user",
+          content: prompt
+        }
       ]
     });
 
