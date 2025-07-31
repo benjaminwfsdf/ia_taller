@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     }
 
     const completion = await openai.chat.completions.create({
-  model: "gpt-3.5-turbo", // <-- cambia esto
+  model: "gpt-4", // <-- cambia esto
   messages: [
     {
       role: "system",
