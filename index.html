@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Asistente de Diagnóstico</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 18px;
+      margin: 10px;
+    }
+    #respuesta {
+      margin-top: 20px;
+      background: #222;
+      padding: 20px;
+      border: 2px solid red;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔧 Asistente IA de Taller</h1>
+  <p>Ingresa un código OBD2 (ej: P0300)</p>
+  <input type="text" id="codigo" placeholder="Código de avería" />
+  <button onclick="consultar()">Consultar</button>
+
+  <div id="respuesta"></div>
+
+  <script>
+    async function consultar() {
+      const codigo = document.getElementById("codigo").value;
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: "Código OBD2: " + codigo })
+      });
+      const data = await res.json();
+      document.getElementById("respuesta").innerText = data.respuesta || data.error;
+    }
+  </script>
+</body>
+</html>
