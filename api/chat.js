@@ -23,15 +23,18 @@ export default async function handler(req, res) {
         {
           role: "system",
           content:
-            "Eres un mecánico experto en diagnóstico automotriz. Cuando el usuario te da un código OBD2 como P0300 o P0420, entrega su significado, causas posibles y soluciones paso a paso, de forma clara."
+            "Eres un mecánico automotriz experto. Cuando recibas un código OBD2 como P0300 o P0420, entrega su significado, causas más probables y pasos recomendados de diagnóstico y reparación."
         },
-        { role: "user", content: prompt }
+        {
+          role: "user",
+          content: prompt
+        }
       ]
     });
 
     res.status(200).json({ respuesta: completion.choices[0].message.content });
   } catch (error) {
-    console.error("Error del servidor:", error);
-    res.status(500).json({ error: "Error del servidor: " + error.message });
+    console.error("ERROR GPT:", error);
+    res.status(500).json({ error: error.message || "Error en el servidor" });
   }
 }
